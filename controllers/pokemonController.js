@@ -1,6 +1,11 @@
 const Pokemon = require("../models/pokemon");
 const asyncHandler = require("express-async-handler");
 
+// Display index on GET.
+exports.index = asyncHandler(async (req, res, next) => {
+  res.send("NOT IMPLEMENTED: Homepage");
+});
+
 // Display pokemon list on GET.
 exports.pokemon_list = asyncHandler(async (req, res, next) => {
   res.send("NOT IMPLEMENTED: Pokemon list");
