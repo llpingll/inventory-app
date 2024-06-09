@@ -65,3 +65,5 @@ router.get("/types/create", types_controller.types_create_get);
 
 // POST request for creating a types
 router.post("/types/create", types_controller.types_create_post);
+
+module.exports = router;
