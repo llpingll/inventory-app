@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+  </head>
+  <body>
+    <h1><%= title %></h1>
+    <ul>
+      <% types.forEach(function(type) { %>
+      <li><%= type.type %></li>
+      <% }) %>
+    </ul>
+    <a href="/pokedex/types/create">Create a new type</a>
+  </body>
+</html>

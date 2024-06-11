@@ -7,6 +7,7 @@
 const app = require("../app");
 const debug = require("debug")("inventory-app:server");
 const http = require("http");
+const mongooseConnection = require("../server");
 
 /**
  * Get port from environment and store in Express.
@@ -28,6 +29,13 @@ const server = http.createServer(app);
 server.listen(port);
 server.on("error", onError);
 server.on("listening", onListening);
+mongooseConnection;
+
+// mongooseConnection.once("open", () => {
+//   server.listen(port);
+//   server.on("error", onError);
+//   server.on("listening", onListening);
+// });
 
 /**
  * Normalize a port into a number, string, or false.
