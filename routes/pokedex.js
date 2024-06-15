@@ -32,6 +32,9 @@ router.get("/pokemon/:id/update", pokemon_controller.pokemon_update_get);
 // POST request for updating a pokemon
 router.post("/pokemon/:id/update", pokemon_controller.pokemon_update_post);
 
+// GET request for a pokemon
+router.get("/pokemon/:id", pokemon_controller.pokemon_detail);
+
 // CAPTURED ROUTES
 
 // GET request for captured list

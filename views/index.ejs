@@ -2,10 +2,36 @@
 <html>
   <head>
     <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link rel="stylesheet" href="/stylesheets/style.css" />
   </head>
   <body>
     <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
+    <div>
+      <p><strong>Number of Pokemon: </strong><%= totalPokemon %></p>
+      <a href="/pokedex/pokemon/">
+        <button type="button">Pokemon list</button>
+      </a>
+      <a href="/pokedex/pokemon/create">
+        <button type="button">Add Pokemon</button>
+      </a>
+    </div>
+    <div>
+      <p><strong>Number of captured Pokemon: </strong><%= totalCaptured %></p>
+      <a href="/pokedex/captured/">
+        <button type="button">Captured list</button>
+      </a>
+      <a href="/pokedex/captured/create">
+        <button type="button">Add Captured Pokemon</button>
+      </a>
+    </div>
+    <div>
+      <p><strong>Number of known types: </strong><%= totalTypes %></p>
+      <a href="/pokedex/types/">
+        <button type="button">Captured list</button>
+      </a>
+      <a href="/pokedex/types/create">
+        <button type="button">Add Captured Pokemon</button>
+      </a>
+    </div>
   </body>
 </html>

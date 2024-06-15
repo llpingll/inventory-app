@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+  </head>
+  <body>
+    <h1><%= title %></h1>
+    <ul>
+      <% pokemons.forEach(function(pokemon) { %>
+      <a href="/pokedex/pokemon/:id">
+        <li><%= pokemon.name %></li>
+      </a>
+      <% }) %>
+    </ul>
+    <a href="/pokedex/types/create">Create a new type</a>
+  </body>
+</html>
