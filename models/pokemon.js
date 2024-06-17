@@ -10,7 +10,7 @@ const PokemonSchema = new Schema({
     required: true,
     enum: ["Common", "Uncommon", "Rare", "Very rare", "Epic", "Legendary"],
   },
-  type: [{ type: Schema.Types.ObjectId, ref: "type" }],
+  type: [{ type: Schema.Types.ObjectId, ref: "Types" }],
 });
 
 PokemonSchema.virtual("url").get(function () {

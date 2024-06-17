@@ -9,23 +9,65 @@
     <!-- Exclude action to send data to same URL as page -->
     <form method="POST">
       <div class="form-group">
-        <label for="name">Pokemon:</label>
-        <input
-          id="name"
-          class="form-control"
-          type="text"
-          placeholder="Pikachu, Charmander etc."
-          name="name"
-          required
-          value="<%= type ? type.name : '' %>"
-        />
+        <div>
+          <label for="name"
+            >Pokemon Name:
+            <input
+              id="name"
+              class="form-control"
+              type="text"
+              placeholder="Pikachu, Charmander etc."
+              name="name"
+              required
+              value="<%= locals.name %>"
+          /></label>
+        </div>
+        <div>
+          <label for="description"
+            >Pokemon Description:
+            <textarea
+              id="description"
+              class="form-control"
+              type="text"
+              name="description"
+              required
+              value="<%= locals.description %>"
+            ></textarea>
+          </label>
+        </div>
+        <div>
+          <label for="rarity"
+            >Pokemon Rarity:
+            <input
+              id="rarity"
+              class="form-control"
+              type="text"
+              placeholder="Common, Uncommon etc."
+              name="rarity"
+              required
+              value="<%= locals.rarity %>"
+          /></label>
+        </div>
+        <div>
+          <label for="type"
+            >Pokemon Type:
+            <input
+              id="type"
+              class="form-control"
+              type="text"
+              placeholder="Fire, Water etc."
+              name="type"
+              required
+              value="<%= locals.type %>"
+          /></label>
+        </div>
       </div>
       <button type="submit">Submit</button>
     </form>
 
-    <% if (errors) { %>
+    <% if (locals.errors) { %>
     <ul>
-      <% errors.forEach(function(error) { %>
+      <% locals.errors.forEach(function(error) { %>
       <li><%= error.msg %></li>
       <% }); %>
     </ul>

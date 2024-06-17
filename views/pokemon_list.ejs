@@ -7,11 +7,11 @@
     <h1><%= title %></h1>
     <ul>
       <% pokemons.forEach(function(pokemon) { %>
-      <a href="/pokedex/pokemon/:id">
+      <a href="/pokedex/pokemon/<%= pokemon.id %>">
         <li><%= pokemon.name %></li>
       </a>
       <% }) %>
     </ul>
-    <a href="/pokedex/types/create">Create a new type</a>
+    <a href="/pokedex/pokemon/create">Create a new Pokemon</a>
   </body>
 </html>

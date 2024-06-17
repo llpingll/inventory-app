@@ -20,6 +20,9 @@ router.get("/pokemon/create", pokemon_controller.pokemon_create_get);
 // POST request for creating a pokemon
 router.post("/pokemon/create", pokemon_controller.pokemon_create_post);
 
+// GET request for a pokemon
+router.get("/pokemon/:id", pokemon_controller.pokemon_detail);
+
 // GET request for deleting a pokemon
 router.get("/pokemon/:id/delete", pokemon_controller.pokemon_delete_get);
 
@@ -31,9 +34,6 @@ router.get("/pokemon/:id/update", pokemon_controller.pokemon_update_get);
 
 // POST request for updating a pokemon
 router.post("/pokemon/:id/update", pokemon_controller.pokemon_update_post);
-
-// GET request for a pokemon
-router.get("/pokemon/:id", pokemon_controller.pokemon_detail);
 
 // CAPTURED ROUTES
 
