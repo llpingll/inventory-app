@@ -6,6 +6,16 @@ const { render } = require("ejs");
 const pokemon = require("../models/pokemon");
 const { body, validationResult } = require("express-validator");
 
+// Define the rarity options for pokemon form
+const rarityOptions = [
+  "Common",
+  "Uncommon",
+  "Rare",
+  "Very rare",
+  "Epic",
+  "Legendary",
+];
+
 // Display index on GET.
 exports.index = asyncHandler(async (req, res, next) => {
   const [totalPokemon, totalCaptured, totalTypes] = await Promise.all([
@@ -34,7 +44,7 @@ exports.pokemon_detail = asyncHandler(async (req, res, next) => {
   const pokemon = await Pokemon.findById(req.params.id).populate("type").exec();
   if (pokemon === null) {
     const error = new Error("Pokemon not found");
-    error.status(404);
+    error.status = 404;
     return next(error);
   }
   res.render("pokemon_detail", { title: "Pokemon Detail", pokemon: pokemon });
@@ -42,7 +52,7 @@ exports.pokemon_detail = asyncHandler(async (req, res, next) => {
 
 // Display Pokemon create form on GET.
 exports.pokemon_create_get = (req, res, next) => {
-  res.render("pokemon_add", { title: "Add Pokemon" });
+  res.render("pokemon_add", { title: "Add Pokemon", rarityOptions });
 };
 
 // Handle Pokemon create form on POST.
@@ -83,10 +93,34 @@ exports.pokemon_create_post = [
       .collation({ locale: "en", strength: 2 })
       .exec();
     // Get typeObjects IDs
-    console.log(typeObjects);
     const typeIDs = typeObjects.map((objects) => objects._id);
 
-    console.log(typeArray);
+    // Custom validation: Add new error if type validation fails
+    if (typeIDs.length !== typeArray.length) {
+      errors.errors.push({
+        value: req.body.type,
+        msg: "One or more types are invalid.",
+        path: "type",
+        location: "body",
+      });
+    }
+
+    // Rerender form with sanitized values if validation errors exist
+    if (!errors.isEmpty()) {
+      res.render("pokemon_add", {
+        title: "Add Pokemon",
+        rarityOptions,
+        errors: errors.array(),
+        name: req.body.name,
+        description: req.body.description,
+        rarity: req.body.rarity,
+        type: req.body.type,
+      });
+      console.log("Body validation error", errors.array());
+      return;
+    }
+
+    // Data from form is valid.
     // Create a pokemon object with escaped and trimmed data.
     const pokemon = new Pokemon({
       name: req.body.name,
@@ -94,31 +128,17 @@ exports.pokemon_create_post = [
       rarity: req.body.rarity,
       type: typeIDs,
     });
-    console.log(pokemon);
 
-    // Rerender form with sanitized values if body validation errors exist or if typesArray & typesIDs length is not equal
-    if (!errors.isEmpty() || typeIDs.length !== typeArray.length) {
-      res.render("pokemon_add", {
-        title: "Add Pokemon",
-        pokemon: pokemon,
-        errors: errors.array(),
-      });
-      console.log("Body validation error", errors.array());
-      return;
+    // Check if pokemon with same name already exists.
+    const existingPokemon = await Pokemon.findOne({ name: req.body.name });
+    // Pokemon exists, redirect to its detail page.
+    if (existingPokemon) {
+      console.log("Pokemon exists");
+      res.redirect(`/pokedex/pokemon/${pokemon._id}`);
     } else {
-      // Data from form is valid.
-      // Check if pokemon with same name already exists.
-      const existingPokemon = await Pokemon.findOne({ name: req.body.name });
-      // Pokemon exists, redirect to its detail page.
-      if (existingPokemon) {
-        console.log("Pokemon exists");
-        res.redirect(`/pokedex/pokemon/${pokemon._id}`);
-      } else {
-        pokemon.type = typeIDs;
-        await pokemon.save();
-        console.log("Created");
-        res.redirect(`/pokedex/pokemon/${pokemon._id}`);
-      }
+      await pokemon.save();
+      console.log("Created");
+      res.redirect(`/pokedex/pokemon/${pokemon._id}`);
     }
   }),
 ];

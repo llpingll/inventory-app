@@ -31,22 +31,19 @@
               type="text"
               name="description"
               required
-              value="<%= locals.description %>"
-            ></textarea>
+            >
+<%= locals.description %></textarea
+            >
           </label>
         </div>
         <div>
-          <label for="rarity"
-            >Pokemon Rarity:
-            <input
-              id="rarity"
-              class="form-control"
-              type="text"
-              placeholder="Common, Uncommon etc."
-              name="rarity"
-              required
-              value="<%= locals.rarity %>"
-          /></label>
+          <label for="rarity">Pokemon Rarity:
+            <select id="rarity" class="form-control" name="rarity" required>
+              <% rarityOptions.forEach(function (option) { %>
+                <option value="<%= option %>" <%= locals.rarity === option ? 'selected' : '' %>><%= option %></option>
+              <% }); %>
+            </select>
+          </label>
         </div>
         <div>
           <label for="type"
