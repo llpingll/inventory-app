@@ -52,7 +52,7 @@ exports.pokemon_detail = asyncHandler(async (req, res, next) => {
 
 // Display Pokemon create form on GET.
 exports.pokemon_create_get = (req, res, next) => {
-  res.render("pokemon_add", { title: "Add Pokemon", rarityOptions });
+  res.render("pokemon_form", { title: "Add Pokemon", rarityOptions });
 };
 
 // Handle Pokemon create form on POST.
@@ -99,7 +99,7 @@ exports.pokemon_create_post = [
     if (typeIDs.length !== typeArray.length) {
       errors.errors.push({
         value: req.body.type,
-        msg: "One or more types are invalid.",
+        msg: "One or more types are invalid, enter valid types (comma seperated) or create a new type.",
         path: "type",
         location: "body",
       });
@@ -107,7 +107,7 @@ exports.pokemon_create_post = [
 
     // Rerender form with sanitized values if validation errors exist
     if (!errors.isEmpty()) {
-      res.render("pokemon_add", {
+      res.render("pokemon_form", {
         title: "Add Pokemon",
         rarityOptions,
         errors: errors.array(),
@@ -134,7 +134,7 @@ exports.pokemon_create_post = [
     // Pokemon exists, redirect to its detail page.
     if (existingPokemon) {
       console.log("Pokemon exists");
-      res.redirect(`/pokedex/pokemon/${pokemon._id}`);
+      res.redirect(`/pokedex/pokemon/${existingPokemon._id}`);
     } else {
       await pokemon.save();
       console.log("Created");
@@ -144,21 +144,101 @@ exports.pokemon_create_post = [
 ];
 
 // Display Pokemon delete form on GET.
-exports.pokemon_delete_get = asyncHandler(async (req, res, next) => {
-  res.send("NOT IMPLEMENTED: Pokemon delete GET");
-});
+// exports.pokemon_delete_get = asyncHandler(async (req, res, next) => {});
 
 // Handle Pokemon delete form on POST.
 exports.pokemon_delete_post = asyncHandler(async (req, res, next) => {
-  res.send("NOT IMPLEMENTED: Pokemon delete POST");
+  await Pokemon.deleteOne({ _id: req.params.id }).exec();
+  res.redirect("/pokedex/pokemon/");
 });
 
 // Display Pokemon update form on GET.
 exports.pokemon_update_get = asyncHandler(async (req, res, next) => {
-  res.send("NOT IMPLEMENTED: Pokemon update GET");
+  const pokemon = await Pokemon.findById(req.params.id).populate("type").exec();
+  console.log(pokemon);
+  res.render("pokemon_update_form", {
+    title: "Update Pokemon",
+    pokemon: pokemon,
+    rarityOptions,
+  });
 });
 
 // Handle Pokemon update form on POST.
-exports.pokemon_update_post = asyncHandler(async (req, res, next) => {
-  res.send("NOT IMPLEMENTED: Pokemon update POST");
-});
+exports.pokemon_update_post = [
+  // Validate and sanitize inputs
+  body("name")
+    .trim()
+    .isLength({ min: 3 })
+    .escape()
+    .withMessage("First name must be 3 or more letters long.")
+    .isAlphanumeric()
+    .withMessage("First name has non-alphanumeric characters."),
+  body("description")
+    .isLength({ min: 10 })
+    .escape()
+    .withMessage("Description must be 10 or more letters long."),
+  body("rarity")
+    .trim()
+    .isLength({ min: 3 })
+    .escape()
+    .withMessage("Rarity must be 3 or more letters long."),
+  body("type")
+    .trim()
+    .isLength({ min: 3 })
+    .escape()
+    .withMessage("Type must be 3 or more letters long."),
+
+  // Process request after validation and sanitization.
+  asyncHandler(async (req, res, next) => {
+    // Extract the validation errors from a request.
+    const errors = validationResult(req);
+
+    // Convert type string to array
+    const typeArray = req.body.type.split(",").map((type) => type.trim());
+
+    // Get types from database
+    const typeObjects = await Types.find({ type: { $in: typeArray } })
+      .collation({ locale: "en", strength: 2 })
+      .exec();
+    // Get typeObjects IDs
+    const typeIDs = typeObjects.map((objects) => objects._id);
+
+    // Custom validation: Add new error if type validation fails
+    if (typeIDs.length !== typeArray.length) {
+      errors.errors.push({
+        value: req.body.type,
+        msg: "One or more types are invalid, enter valid types (comma seperated) or create a new type.",
+        path: "type",
+        location: "body",
+      });
+    }
+
+    // Create a pokemon object with escaped and trimmed data.
+    const pokemon = new Pokemon({
+      name: req.body.name,
+      description: req.body.description,
+      rarity: req.body.rarity,
+      type: typeIDs,
+      _id: req.params.id,
+    });
+
+    // Rerender form with sanitized values if validation errors exist
+    if (!errors.isEmpty()) {
+      res.render("pokemon_update_form", {
+        title: "Update Pokemon",
+        rarityOptions,
+        errors: errors.array(),
+        pokemon,
+        type: req.body.type,
+      });
+      // console.log("Body validation error", errors.array());
+      return;
+    }
+
+    // Data from form is valid.
+    // Find and update pokemon.
+    await Pokemon.findByIdAndUpdate(req.params.id, pokemon, { new: true });
+    console.log("Created");
+    res.redirect(`/pokedex/pokemon/${pokemon._id}`);
+  }),
+];

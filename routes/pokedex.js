@@ -24,7 +24,7 @@ router.post("/pokemon/create", pokemon_controller.pokemon_create_post);
 router.get("/pokemon/:id", pokemon_controller.pokemon_detail);
 
 // GET request for deleting a pokemon
-router.get("/pokemon/:id/delete", pokemon_controller.pokemon_delete_get);
+// router.get("/pokemon/:id/delete", pokemon_controller.pokemon_delete_get);
 
 // POST request for deleting a pokemon
 router.post("/pokemon/:id/delete", pokemon_controller.pokemon_delete_post);

@@ -13,7 +13,11 @@
       type.type %><% if (pokemon.type.indexOf(type) !== pokemon.type.length - 1)
       { %>, <% } %> <% }) %>
     </p>
-    <a href="/pokedex/pokemon/update">Update Pokemon</a>
-    <a href="/pokedex/types/Delete">Delete Pokemon</a>
+    <form action="/pokedex/pokemon/<%= pokemon._id %>/delete" method="POST">
+      <button type="submit">Delete Pokemon</button>
+    </form>
+    <form action="/pokedex/pokemon/<%= pokemon._id %>/update" method="GET">
+      <button type="submit">Update Pokemon</button>
+    </form>
   </body>
 </html>

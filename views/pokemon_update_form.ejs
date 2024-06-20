@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+  </head>
+  <body>
+    <h1><%= title %></h1>
+
+    <!-- Exclude action to send data to same URL as page -->
+    <form method="POST">
+      <div class="form-group">
+        <div>
+          <label for="name"
+            >Pokemon Name:
+            <input
+              id="name"
+              class="form-control"
+              type="text"
+              placeholder="Pikachu, Charmander etc."
+              name="name"
+              required
+              value="<%= pokemon.name %>"
+          /></label>
+        </div>
+        <div>
+          <label for="description"
+            >Pokemon Description:
+            <textarea
+              id="description"
+              class="form-control"
+              type="text"
+              name="description"
+              required
+            >
+<%= pokemon.description %></textarea
+            >
+          </label>
+        </div>
+        <div>
+          <label for="rarity">Pokemon Rarity:
+            <select id="rarity" class="form-control" name="rarity" required>
+              <% rarityOptions.forEach(function (option) { %>
+                <option value="<%= option %>" <%= pokemon.rarity === option ? 'selected' : '' %>><%= option %></option>
+              <% }); %>
+            </select>
+          </label>
+        </div>
+        <div>
+          <label for="type"
+            >Pokemon Type:
+            <input
+              id="type"
+              class="form-control"
+              type="text"
+              placeholder="Fire, Water etc."
+              name="type"
+              required
+              value="<%= typeof type === 'string' ? type : pokemon.type.map(type => type.type).join(', ') %>"
+          /></label>
+        </div>
+      </div>
+      <button type="submit">Submit</button>
+    </form>
+
+    <% if (locals.errors) { %>
+    <ul>
+      <% locals.errors.forEach(function(error) { %>
+      <li><%= error.msg %></li>
+      <% }); %>
+    </ul>
+    <% } %>
+  </body>
+</html>
