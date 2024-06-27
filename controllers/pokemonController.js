@@ -2,8 +2,6 @@ const Pokemon = require("../models/pokemon");
 const Captured = require("../models/captured");
 const Types = require("../models/types");
 const asyncHandler = require("express-async-handler");
-const { render } = require("ejs");
-const pokemon = require("../models/pokemon");
 const { body, validationResult } = require("express-validator");
 
 // Define the rarity options for pokemon form
@@ -42,7 +40,6 @@ exports.pokemon_list = asyncHandler(async (req, res, next) => {
 // Display detail page for a specific pokemon.
 exports.pokemon_detail = asyncHandler(async (req, res, next) => {
   const pokemon = await Pokemon.findById(req.params.id).populate("type").exec();
-  console.log(pokemon);
   if (pokemon === null) {
     const error = new Error("Pokemon not found");
     error.status = 404;
@@ -117,7 +114,6 @@ exports.pokemon_create_post = [
         rarity: req.body.rarity,
         type: req.body.type,
       });
-      console.log("Body validation error", errors.array());
       return;
     }
 
@@ -134,11 +130,9 @@ exports.pokemon_create_post = [
     const existingPokemon = await Pokemon.findOne({ name: req.body.name });
     // Pokemon exists, redirect to its detail page.
     if (existingPokemon) {
-      console.log("Pokemon exists");
       res.redirect(`/pokedex/pokemon/${existingPokemon._id}`);
     } else {
       await pokemon.save();
-      console.log("Created");
       res.redirect(`/pokedex/pokemon/${pokemon._id}`);
     }
   }),
@@ -153,7 +147,6 @@ exports.pokemon_delete_post = asyncHandler(async (req, res, next) => {
 // Display Pokemon update form on GET.
 exports.pokemon_update_get = asyncHandler(async (req, res, next) => {
   const pokemon = await Pokemon.findById(req.params.id).populate("type").exec();
-  console.log(pokemon);
   res.render("pokemon_update_form", {
     title: "Update Pokemon",
     pokemon: pokemon,
@@ -236,7 +229,6 @@ exports.pokemon_update_post = [
     // Data from form is valid.
     // Find and update pokemon.
     await Pokemon.findByIdAndUpdate(req.params.id, pokemon, { new: true });
-    console.log("Created");
     res.redirect(`/pokedex/pokemon/${pokemon._id}`);
   }),
 ];
