@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+  </head>
+  <body>
+    <h1><%= title %></h1>
+
+    <!-- Exclude action to send data to same URL as page -->
+    <form method="POST">
+      <div class="form-group">
+        <div>
+          <label for="name"
+            >Pokemon Name:
+            <input
+              id="name"
+              class="form-control"
+              type="text"
+              placeholder="Pikachu, Charmander etc."
+              name="name"
+              required
+              value="<%= locals.name %>"
+          /></label>
+        </div>
+        <div>
+          <label for="nickName"
+            >Pokemon Nickname:
+            <input
+              id="nickName"
+              class="form-control"
+              type="text"
+              placeholder="Optional"
+              name="nickName"
+              value="<%= locals.nickName %>"
+            />
+          </label>
+        </div>
+        <div>
+          <label for="capturedLevel"
+            >Captured Level:
+            <input
+              id="capturedLevel"
+              class="form-control"
+              type="number"
+              name="capturedLevel"
+              required
+              value="<%= locals.capturedLevel %>"
+            />
+          </label>
+        </div>
+        <div>
+          <label for="dateCaptured"
+            >Captured date:
+            <input
+              id="dateCaptured"
+              class="form-control"
+              type="date"
+              name="dateCaptured"
+              value="<%= locals.dateCaptured %>"
+          /></label>
+        </div>
+      </div>
+      <button type="submit">Submit</button>
+    </form>
+
+    <% if (locals.errors) { %>
+    <ul>
+      <% locals.errors.forEach(function(error) { %>
+      <li><%= error.msg %></li>
+      <% }); %>
+    </ul>
+    <% } %>
+  </body>
+</html>

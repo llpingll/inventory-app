@@ -42,6 +42,7 @@ exports.pokemon_list = asyncHandler(async (req, res, next) => {
 // Display detail page for a specific pokemon.
 exports.pokemon_detail = asyncHandler(async (req, res, next) => {
   const pokemon = await Pokemon.findById(req.params.id).populate("type").exec();
+  console.log(pokemon);
   if (pokemon === null) {
     const error = new Error("Pokemon not found");
     error.status = 404;
@@ -142,9 +143,6 @@ exports.pokemon_create_post = [
     }
   }),
 ];
-
-// Display Pokemon delete form on GET.
-// exports.pokemon_delete_get = asyncHandler(async (req, res, next) => {});
 
 // Handle Pokemon delete form on POST.
 exports.pokemon_delete_post = asyncHandler(async (req, res, next) => {

@@ -6,7 +6,7 @@ const CapturedSchema = new Schema({
   pokemon: { type: Schema.Types.ObjectId, ref: "Pokemon", required: true },
   nickName: { type: String, maxLength: 15, default: "" },
   capturedLevel: { type: Number, required: true },
-  dateCaptured: { type: Date, default: Date.now },
+  dateCaptured: { type: Date },
 });
 
 CapturedSchema.virtual("url").get(function () {

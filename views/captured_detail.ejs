@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+  </head>
+  <body>
+    <h1><%= title %></h1>
+    <p><Strong>Name: </Strong><%= pokemon.pokemon.name %></p>
+    <p><Strong>Nickname: </Strong><%= pokemon.nickName || "N/A" %></p>
+    <p><Strong>Level when captured: </Strong><%= pokemon.capturedLevel %></p>
+    <p><Strong>Date captured: </Strong><%= pokemon.dateCaptured %></p>
+    <a href="/pokedex/pokemon/<%=pokemon.pokemon._id%>">Pokemon Detail</a>
+    <form action="/pokedex/captured/<%= pokemon._id %>/delete" method="POST">
+      <button type="submit">Delete Pokemon</button>
+    </form>
+    <form action="/pokedex/captured/<%= pokemon._id %>/update" method="GET">
+      <button type="submit">Update Pokemon</button>
+    </form>
+  </body>
+</html>

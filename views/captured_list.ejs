@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+  </head>
+  <body>
+    <h1><%= title %></h1>
+    <ul>
+      <% captured.forEach((pokemon) => { %>
+      <a href="/pokedex/captured/<%= pokemon._id %>"
+        ><li><%= pokemon.pokemon.name %></li></a
+      >
+      <% }) %>
+    </ul>
+    <a href="/pokedex/captured/create">Create a new captured pokemon</a>
+  </body>
+</html>
