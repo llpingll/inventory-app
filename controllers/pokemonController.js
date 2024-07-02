@@ -141,6 +141,7 @@ exports.pokemon_create_post = [
 // Handle Pokemon delete form on POST.
 exports.pokemon_delete_post = asyncHandler(async (req, res, next) => {
   await Pokemon.deleteOne({ _id: req.params.id }).exec();
+  await Captured.deleteMany({ pokemon: req.params.id });
   res.redirect("/pokedex/pokemon/");
 });
 

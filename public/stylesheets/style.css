@@ -1,8 +1,73 @@
-body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
 }
 
-a {
-  color: #00B7FF;
+.header {
+  padding: 20px;
+  background-color: red;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+header img {
+  width: 300px;
+}
+
+nav {
+  display: flex;
+  gap: 15px;
+}
+
+nav a {
+  text-decoration: none;
+  color: black;
+  font-weight: 600;
+  font-size: 22px;
+}
+
+nav a:hover {
+  color: yellow;
+}
+
+.separator {
+  height: 20px;
+  width: 100%;
+  background-color: black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.outer-ball {
+  width: 60px;
+  height: 60px;
+  border: 6px solid black;
+  background-color: white;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.inner-ball {
+  width: 30px;
+  height: 30px;
+  border: 6px solid black;
+  background-color: white;
+  border-radius: 50%;
+}
+
+body {
+  color: black;
+  font-family: "Nunito", sans-serif;
+}
+
+.index {
+  padding: 20px;
+  text-align: center;
 }
