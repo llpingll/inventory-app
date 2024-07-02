@@ -23,7 +23,7 @@ nav {
   gap: 15px;
 }
 
-nav a {
+a {
   text-decoration: none;
   color: black;
   font-weight: 600;
@@ -65,9 +65,46 @@ nav a:hover {
 body {
   color: black;
   font-family: "Nunito", sans-serif;
+  font-size: 20px;
 }
 
 .index {
-  padding: 20px;
+  padding: 25px;
   text-align: center;
+}
+
+.index h1 {
+  padding-bottom: 10px;
+  font-size: 30px;
+}
+
+.index button {
+  font-family: "Nunito", sans-serif;
+  font-size: 20px;
+  border: none;
+  border-radius: 18.5px;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+.index button:hover {
+  transform: scale(1.05);
+  transition: ease-in-out, 0.3s;
+}
+
+.index div {
+  padding-bottom: 30px;
+}
+
+.index a {
+  display: block;
+  padding: 5px;
+}
+
+.list {
+  background-color: rgba(255, 255, 0, 0.5);
+}
+
+.add {
+  background-color: rgba(0, 60, 255, 0.5);
 }

@@ -23,7 +23,7 @@ exports.index = asyncHandler(async (req, res, next) => {
   ]);
 
   res.render("index", {
-    title: "Pokedex Index",
+    title: "Index",
     totalPokemon: totalPokemon,
     totalCaptured: totalCaptured,
     totalTypes: totalTypes,
