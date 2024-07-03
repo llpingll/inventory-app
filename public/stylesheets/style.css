@@ -6,6 +6,7 @@
   margin: 0;
 }
 
+/* HEADER */
 .header {
   padding: 20px;
   background-color: red;
@@ -62,23 +63,24 @@ nav a:hover {
   border-radius: 50%;
 }
 
+/* BODY */
 body {
   color: black;
   font-family: "Nunito", sans-serif;
   font-size: 20px;
 }
 
-.index {
+.content {
   padding: 25px;
   text-align: center;
 }
 
-.index h1 {
+.content h1 {
   padding-bottom: 10px;
   font-size: 30px;
 }
 
-.index button {
+.content button {
   font-family: "Nunito", sans-serif;
   font-size: 20px;
   border: none;
@@ -87,24 +89,78 @@ body {
   cursor: pointer;
 }
 
-.index button:hover {
+.content button:hover {
   transform: scale(1.05);
   transition: ease-in-out, 0.3s;
 }
 
-.index div {
+.content div {
   padding-bottom: 30px;
 }
 
-.index a {
+.content a {
   display: block;
   padding: 5px;
 }
 
 .list {
-  background-color: rgba(255, 255, 0, 0.5);
+  background-color: #ffb5b5;
 }
 
 .add {
-  background-color: rgba(0, 60, 255, 0.5);
+  background-color: #b5ffb5;
+}
+
+/* POKEMON LIST */
+.poke-list {
+  margin-bottom: 10px;
+}
+
+/* ADD POKEMON */
+.content .form-group {
+  padding-bottom: 5px;
+}
+
+.form-group > div {
+  padding-bottom: 20px;
+}
+
+.form-group label {
+  font-weight: 600;
+  display: flex;
+  flex-direction: column;
+  max-width: 500px;
+  margin: auto;
+}
+
+.form-group .form-control {
+  max-width: 200px;
+  height: 24px;
+  margin: auto;
+  text-align: center;
+  font-size: 18px;
+  border-radius: 5px;
+  border: black solid 1px;
+}
+
+#description {
+  width: 100%;
+  height: 80px;
+  border-radius: 5px;
+  border: black solid 1px;
+}
+
+#rarity {
+  text-align: center;
+  min-width: 200px;
+  margin: auto;
+  font-size: 18px;
+  border-radius: 5px;
+  border: black solid 1px;
+}
+
+.error {
+  margin-top: 20px;
+  list-style-type: none;
+  color: red;
 }

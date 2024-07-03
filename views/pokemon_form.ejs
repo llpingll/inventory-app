@@ -3,6 +3,7 @@
   <%- include("partials/head") %>
   <body>
     <%- include("partials/header") %>
+    <div class="content">
     <h1><%= title %></h1>
     <!-- Exclude action to send data to same URL as page -->
     <form method="POST">
@@ -25,7 +26,6 @@
             >Pokemon Description:
             <textarea
               id="description"
-              class="form-control"
               type="text"
               name="description"
               required
@@ -36,7 +36,7 @@
         </div>
         <div>
           <label for="rarity">Pokemon Rarity:
-            <select id="rarity" class="form-control" name="rarity" required>
+            <select id="rarity" name="rarity" required>
               <% rarityOptions.forEach(function (option) { %>
                 <option value="<%= option %>" <%= locals.rarity === option ? 'selected' : '' %>><%= option %></option>
               <% }); %>
@@ -57,15 +57,16 @@
           /></label>
         </div>
       </div>
-      <button type="submit">Submit</button>
+      <button class="add" type="submit">Submit</button>
     </form>
 
     <% if (locals.errors) { %>
-    <ul>
+    <ul class="error">
       <% locals.errors.forEach(function(error) { %>
       <li><%= error.msg %></li>
       <% }); %>
     </ul>
     <% } %>
+  </div>
   </body>
 </html>

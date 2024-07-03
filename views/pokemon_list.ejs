@@ -3,14 +3,16 @@
   <%- include("partials/head") %>
   <body>
     <%- include("partials/header") %>
-    <h1><%= title %></h1>
-    <ul>
+    <div class="content">
+      <h1><%= title %></h1>
       <% pokemons.forEach(function(pokemon) { %>
-      <a href="/pokedex/pokemon/<%= pokemon.id %>">
-        <li><%= pokemon.name %></li>
+      <a class="poke-list" href="/pokedex/pokemon/<%= pokemon.id %>">
+        <%= pokemon.name %>
       </a>
       <% }) %>
-    </ul>
-    <a href="/pokedex/pokemon/create">Create a new Pokemon</a>
+      <a href="/pokedex/pokemon/create">
+        <button class="add" type="button">Add Pokemon</button>
+      </a>
+    </div>
   </body>
 </html>
