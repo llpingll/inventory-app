@@ -3,14 +3,16 @@
   <%- include("partials/head") %>
   <body>
     <%- include("partials/header") %>
-    <h1><%= title %></h1>
-    <ul>
+    <div class="content">
+      <h1><%= title %></h1>
       <% captured.forEach((pokemon) => { %>
-      <a href="/pokedex/captured/<%= pokemon._id %>"
-        ><li><%= pokemon.pokemon.name %></li></a
+      <a class="poke-list" href="/pokedex/captured/<%= pokemon._id %>"
+        ><%= pokemon.pokemon.name %></a
       >
       <% }) %>
-    </ul>
-    <a href="/pokedex/captured/create">Create a new captured pokemon</a>
+      <a href="/pokedex/captured/create"
+        ><button class="add" type="button">Add Captured Pokemon</button></a
+      >
+    </div>
   </body>
 </html>

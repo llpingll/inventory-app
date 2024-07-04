@@ -3,12 +3,14 @@
   <%- include("partials/head") %>
   <body>
     <%- include("partials/header") %>
-    <h1><%= title %></h1>
-    <ul>
+    <div class="content">
+      <h1><%= title %></h1>
       <% types.forEach(function(type) { %>
-      <li><%= type.type %></li>
+      <p class="poke-list"><%= type.type %></p>
       <% }) %>
-    </ul>
-    <a href="/pokedex/types/create">Create a new type</a>
+      <a href="/pokedex/types/create"
+        ><button class="add" type="button">Add Type</button></a
+      >
+    </div>
   </body>
 </html>

@@ -3,20 +3,22 @@
   <%- include("partials/head") %>
   <body>
     <%- include("partials/header") %>
-    <h1><%= title %></h1>
-    <p><Strong>Name: </Strong><%= pokemon.name %></p>
-    <p><Strong>Description: </Strong><%= pokemon.description %></p>
-    <p><Strong>Rarity: </Strong><%= pokemon.rarity %></p>
-    <p>
-      <Strong>Type: </Strong><% pokemon.type.forEach(function(type) { %> <%=
-      type.type %><% if (pokemon.type.indexOf(type) !== pokemon.type.length - 1)
-      { %>, <% } %> <% }) %>
-    </p>
-    <form action="/pokedex/pokemon/<%= pokemon._id %>/delete" method="POST">
-      <button type="submit">Delete Pokemon</button>
-    </form>
-    <form action="/pokedex/pokemon/<%= pokemon._id %>/update" method="GET">
-      <button type="submit">Update Pokemon</button>
-    </form>
+    <div class="content detail">
+      <h1><%= title %></h1>
+      <p><Strong>Name: </Strong><%= pokemon.name %></p>
+      <p><Strong>Description: </Strong><%= pokemon.description %></p>
+      <p><Strong>Rarity: </Strong><%= pokemon.rarity %></p>
+      <p>
+        <Strong>Type: </Strong><% pokemon.type.forEach(function(type) { %> <%=
+        type.type %><% if (pokemon.type.indexOf(type) !== pokemon.type.length -
+        1) { %>, <% } %> <% }) %>
+      </p>
+      <form action="/pokedex/pokemon/<%= pokemon._id %>/delete" method="POST">
+        <button class="list" type="submit">Delete Pokemon</button>
+      </form>
+      <form action="/pokedex/pokemon/<%= pokemon._id %>/update" method="GET">
+        <button class="add" type="submit">Update Pokemon</button>
+      </form>
+    </div>
   </body>
 </html>

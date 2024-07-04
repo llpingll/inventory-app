@@ -24,7 +24,8 @@ nav {
   gap: 15px;
 }
 
-a {
+a,
+p {
   text-decoration: none;
   color: black;
   font-weight: 600;
@@ -72,6 +73,10 @@ body {
 
 .content {
   padding: 25px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   text-align: center;
 }
 
@@ -98,9 +103,12 @@ body {
   padding-bottom: 30px;
 }
 
-.content a {
+.content a,
+.content p {
   display: block;
   padding: 5px;
+  max-width: max-content;
+  margin: auto;
 }
 
 .list {
@@ -113,10 +121,15 @@ body {
 
 /* POKEMON LIST */
 .poke-list {
+  font-size: 20px;
   margin-bottom: 10px;
 }
 
 /* ADD POKEMON */
+.content form {
+  width: 100%;
+}
+
 .content .form-group {
   padding-bottom: 5px;
 }
@@ -129,7 +142,7 @@ body {
   font-weight: 600;
   display: flex;
   flex-direction: column;
-  max-width: 500px;
+  width: 100%;
   margin: auto;
 }
 
@@ -143,11 +156,19 @@ body {
   border: black solid 1px;
 }
 
-#description {
+.description label {
   width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#description {
+  width: 50%;
   height: 80px;
   border-radius: 5px;
   border: black solid 1px;
+  font-size: 20px;
 }
 
 #rarity {
@@ -163,4 +184,34 @@ body {
   margin-top: 20px;
   list-style-type: none;
   color: red;
+}
+
+/* POKEMON/CAPTURED DETAIL */
+.detail p {
+  padding-bottom: 20px;
+  font-size: 20px;
+}
+
+.detail Strong {
+  display: block;
+  font-size: 22px;
+}
+
+.detail form {
+  padding-bottom: 20px;
+}
+
+.detail .to-pokemon {
+  margin-bottom: 20px;
+  background-color: rgba(255, 238, 0, 0.603);
+}
+
+@media all and (max-width: 700px) {
+  .header {
+    flex-direction: column;
+  }
+
+  nav {
+    padding: 20px;
+  }
 }
