@@ -7,7 +7,6 @@ const { formatDate, formatDateForInput } = require("./helpers/dateFormatter");
 // Display captured list on GET.
 exports.captured_list = asyncHandler(async (req, res, next) => {
   const captured = await Captured.find({}).populate("pokemon").exec();
-  // console.log(captured);
   res.render("captured_list", { title: "Captured Pokemon", captured });
 });
 

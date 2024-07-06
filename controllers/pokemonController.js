@@ -223,7 +223,6 @@ exports.pokemon_update_post = [
         pokemon,
         type: req.body.type,
       });
-      // console.log("Body validation error", errors.array());
       return;
     }
 
