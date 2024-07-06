@@ -5,7 +5,8 @@ const mongoose = require("mongoose");
 mongoose.set("strictQuery", false);
 
 // Define the database URL to connect to.
-const mongoDB = "mongodb://127.0.0.1:27017/inventory-app";
+const mongoDB =
+  "mongodb+srv://luiduarte1:iENCCzp0ZShQYBl1@cluster0.lwbvp2w.mongodb.net/inventory-app?retryWrites=true&w=majority&appName=Cluster0";
 
 // Wait for database to connect, logging an error if there is a problem
 main().catch((err) => console.log(err));
