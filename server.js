@@ -1,5 +1,10 @@
 const mongoose = require("mongoose");
 
+// Load environment variables from .env file if not in production
+if (process.env.NODE_ENV !== "production") {
+  require("dotenv").config();
+}
+
 // Set `strictQuery: false` to globally opt into filtering by properties that aren't in the schema
 // Included because it removes preparatory warnings for Mongoose 7.
 mongoose.set("strictQuery", false);
